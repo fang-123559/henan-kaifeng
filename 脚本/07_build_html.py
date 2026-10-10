@@ -175,7 +175,7 @@ details.note li{margin:3px 0}
 <div class="wrap">
 <header>
   <h1>开封美食地图 <span>·</span> 清明上河园 / 鼓楼 / 老河大</h1>
-  <div class="sub">来源：小红书帖子与评论区截图 62 张 · 坐标经腾讯地图逐条检索（实心点＝精确，空心虚线点＝区域近似）· 底图：高德 · 住宿：汉庭酒店(开封鼓楼火车站店)（<b>地图上唯一的红色五角星</b>）· <b>每条均可点开「来源截图」原图核对</b></div>
+  <div class="sub">来源：小红书帖子与评论区截图 62 张 · 坐标经腾讯地图逐条检索（实心点＝精确，空心虚线点＝区域近似）· 底图：高德 · 住宿：住处（<b>地图上唯一的红色五角星</b>）· <b>每条均可点开「来源截图」原图核对</b></div>
   <div class="stats">
     <span>条目总数 <b id="s1">0</b></span>
     <span>精确定位 <b id="s2">0</b></span>
@@ -197,7 +197,7 @@ details.note li{margin:3px 0}
     <option value="area">按区域</option>
   </select>
   <button class="btn primary" id="geo">📍 获取我的位置并算距离</button>
-  <button class="btn" id="toHotel">🏨 以酒店为基准算距离</button>
+  <button class="btn" id="toHotel">🏨 以住处为基准算距离</button>
   <button class="btn" id="resetDist" style="display:none">↺ 重置距离</button>
 </div>
 
@@ -211,7 +211,7 @@ details.note li{margin:3px 0}
       <div id="map"></div>
       <div class="mapfail" id="mapfail">⚠️ 底图瓦片加载失败。真实地图需要联网（瓦片来自高德）。请检查网络后刷新；<b>圆点与店铺数据不受影响</b>，仍可在下方列表查看全部条目。</div>
       <div class="legend" id="legend"></div>
-      <div class="hint"><b>地图操作</b>：双指捏合缩放 / 单指拖动平移（手机），滚轮缩放 / 按住拖动（电脑），左上角 ＋/－ 按钮亦可。<br><b>实心圆点</b>＝已精确定位的店铺（颜色区分类型）；<b>空心圆点</b>＝仅知大致区域（夜市摊位、园内摊位等，无独立地图POI）；<b>★ 红色五角星（全图唯一）</b>＝本次住宿「汉庭酒店(开封鼓楼火车站店)」。点击任意点即可查看详情。<br><b>复制</b>：清单每张卡片店名旁的「复制」按钮＝一键复制店名；点开详情后还可复制「名称 + 地址」，方便直接发给同行的人。</div>
+      <div class="hint"><b>地图操作</b>：双指捏合缩放 / 单指拖动平移（手机），滚轮缩放 / 按住拖动（电脑），左上角 ＋/－ 按钮亦可。<br><b>实心圆点</b>＝已精确定位的店铺（颜色区分类型）；<b>空心圆点</b>＝仅知大致区域（夜市摊位、园内摊位等，无独立地图POI）；<b>★ 红色五角星（全图唯一）</b>＝本次住处。点击任意点即可查看详情。<br><b>复制</b>：清单每张卡片店名旁的「复制」按钮＝一键复制店名；点开详情后还可复制「名称 + 地址」，方便直接发给同行的人。</div>
     </div>
     <aside>
       <div class="detail" id="detail"><h3>点选一个地点</h3><div class="kv">在地图上点击圆点，或在右侧清单中选择，这里会显示详细信息、来源截图与导航入口。</div></div>
@@ -540,7 +540,7 @@ function toast(title,body,opt){
   })();
   box.className="toast on"+(opt.ok?" ok":"");
   box.innerHTML='<div class="tt"><span>'+title+'</span><span class="x" id="tx">✕</span></div><div class="tb">'+body+'</div>'
-    +(opt.hotel?'<div class="acts"><button class="p" id="toastHotel">🏨 改用酒店为基准算距离</button><button id="toastClose">知道了</button></div>':"");
+    +(opt.hotel?'<div class="acts"><button class="p" id="toastHotel">🏨 改用住处为基准算距离</button><button id="toastClose">知道了</button></div>':"");
   const close=()=>box.classList.remove("on");
   const x=el("tx"); if(x) x.onclick=close;
   const tc=el("toastClose"); if(tc) tc.onclick=close;
@@ -589,28 +589,28 @@ function copySpot(id, full){
 }
 
 function useHotel(){
-  const h=SPOTS.find(s=>s.lat && s.n.indexOf("汉庭")>=0);
-  if(!h){ toast("未找到住宿坐标","数据中未检索到「汉庭酒店(开封鼓楼火车站店)」的坐标。"); return; }
+  const h=SPOTS.find(s=>s.star);
+  if(!h){ toast("未找到住处坐标","数据中未检索到「住处」的坐标。"); return; }
   myPos={lat:h.lat,lng:h.lng}; myPosBase="hotel";
   el("geo").textContent="📍 获取我的位置并算距离";
-  el("toHotel").textContent="🏨 已用酒店为基准";
+  el("toHotel").textContent="🏨 已用住处为基准";
   el("fOrder").value="dist";
   showReset();
   renderList(); renderMap(current);
   if(current) select(current.id,true);
-  toast("已切换为酒店基准","所有条目的距离已改为「距汉庭酒店(开封鼓楼火车站店)的直线距离」，并按由近到远排序。",{ok:true});
+  toast("已切换为住处基准","所有条目的距离已改为「距住处的直线距离」，并按由近到远排序。",{ok:true});
 }
 function showReset(){
   const on = !!myPos;
   const b=el("resetDist"); if(b) b.style.display = on ? "" : "none";
   const s4=el("s4");
-  if(s4) s4.innerHTML = on ? "距离基准：<b>"+(myPosBase==="hotel"?"汉庭酒店":"我的位置")+"</b>" : "距离：未获取定位";
+  if(s4) s4.innerHTML = on ? "距离基准：<b>"+(myPosBase==="hotel"?"住处":"我的位置")+"</b>" : "距离：未获取定位";
 }
 el("resetDist").addEventListener("click",()=>{
   myPos=null; myPosBase=null;
   el("fOrder").value="def";
   el("geo").textContent="📍 获取我的位置并算距离";
-  el("toHotel").textContent="🏨 以酒店为基准算距离";
+  el("toHotel").textContent="🏨 以住处为基准算距离";
   showReset();
   renderList(); renderMap(current);
   toast("已重置距离","已清除距离基准，列表恢复默认顺序、不再显示距离。可随时重新选择基准。",{ok:true});
@@ -618,11 +618,11 @@ el("resetDist").addEventListener("click",()=>{
 
 /* ---------- 定位 ---------- */
 el("geo").addEventListener("click",()=>{
-  if(!navigator.geolocation){ toast("浏览器不支持定位","当前浏览器未提供定位接口。请改用「🏨 以酒店为基准算距离」。",{hotel:true}); return; }
+  if(!navigator.geolocation){ toast("浏览器不支持定位","当前浏览器未提供定位接口。请改用「🏨 以住处为基准算距离」。",{hotel:true}); return; }
   const host=location.hostname, proto=location.protocol;
   const secure = proto==="https:" || proto==="file:" || host==="localhost" || host==="127.0.0.1" || host==="[::1]" || host==="";
   if(!secure){
-    toast("当前环境无法定位","浏览器只在 <b>HTTPS</b> 或 <b>localhost</b> 下允许网页定位。<br>当前地址：<code>"+proto+"//"+host+"</code><ul><li>改用本地服务器打开：在项目目录执行 <code>python -m http.server 8000</code>，再访问 <code>http://localhost:8000/</code></li><li>或直接点下方按钮，以酒店为基准算距离</li></ul>",{hotel:true});
+    toast("当前环境无法定位","浏览器只在 <b>HTTPS</b> 或 <b>localhost</b> 下允许网页定位。<br>当前地址：<code>"+proto+"//"+host+"</code><ul><li>改用本地服务器打开：在项目目录执行 <code>python -m http.server 8000</code>，再访问 <code>http://localhost:8000/</code></li><li>或直接点下方按钮，以住处为基准算距离</li></ul>",{hotel:true});
     return;
   }
   const btn=el("geo"); const old=btn.textContent;
@@ -643,9 +643,9 @@ el("geo").addEventListener("click",()=>{
       b="浏览器拦截了本次定位授权（原始信息：<code>User denied Geolocation</code>），这是浏览器安全策略，并非页面故障。<ul>"
        +"<li>点地址栏左侧的 <b>🔒 / ⓘ</b> 图标 → 找到「位置信息」→ 改为「允许」→ 刷新页面后重试</li>"
        +"<li>若你是直接双击打开（地址以 <code>file://</code> 开头），部分浏览器会直接禁用定位，需改用本地服务器</li></ul>"
-       +"不想设置也行——用下方按钮以酒店为基准算距离，效果一致。";
+       +"不想设置也行——用下方按钮以住处为基准算距离，效果一致。";
     } else if(err.code===2){ t="无法获取位置"; b="设备定位信号不可用（<i>"+err.message+"</i>）。请检查系统「定位服务 / 位置信息」是否已开启。"; }
-    else if(err.code===3){ t="定位超时"; b="10 秒内未取到位置（<i>"+err.message+"</i>）。请重试，或改用酒店为基准。"; }
+    else if(err.code===3){ t="定位超时"; b="10 秒内未取到位置（<i>"+err.message+"</i>）。请重试，或改用住处为基准。"; }
     else { t="定位失败"; b=(err.message||"未知错误"); }
     toast(t,b,{hotel:true});
   },{enableHighAccuracy:true,timeout:10000,maximumAge:60000});

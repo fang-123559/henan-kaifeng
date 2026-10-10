@@ -237,7 +237,7 @@ setTimeout(function(){
     out.state={vb:[+S.VB.w.toFixed(3),+S.VB.cx.toFixed(3),+S.VB.cy.toFixed(3)],
       wOut:+S.VB.wOut.toFixed(3), tier:S.tierOf(), noteOpen:!document.querySelector('#note').hidden,
       hotelInferred:(function(){
-        for(var i=0;i<L.length;i++) if(L[i].t.indexOf('汉庭')>=0) return L[i].t;
+        for(var i=0;i<L.length;i++) if(L[i].t.indexOf('住处')>=0) return L[i].t;
         return '(未出现)';})()};
     /* 住处标签的摆位履历：merge=这次 declutter 被 requestAnimationFrame 合并吞掉 */
     out.dlog=(S.dlog?S.dlog():[]).slice(-24);
@@ -449,7 +449,7 @@ if __name__ == "__main__":
     chk("住处归确址", o["hotel"]["ink"], 1)
     chk("住处满墨", o["hotel"]["op"], 1.0, tol=0.001)
     chk("住处可点", o["hotel"]["pe"], "all")
-    chk("住处名字", o["hotel"]["lbl"], "宿 · 汉庭酒店")
+    chk("住处名字", o["hotel"]["lbl"], "宿 · 住处")
     chk("住处标签常显", o["hotel"]["lblShown"], True)
     chk("住处纸色衬垫", o["hotel"]["pad"], True)
     chk("墨样柱有「宿」行", o["hotel"]["legend"], True)
@@ -471,7 +471,7 @@ if __name__ == "__main__":
 
     print("O. 选中项：点开后它自己的名字不得消失")
     chk("选中项标签仍显示", o["selLbl"]["shown"], True)
-    chk("选中项标签文字", o["selLbl"]["txt"], "宿 · 汉庭酒店")
+    chk("选中项标签文字", o["selLbl"]["txt"], "宿 · 住处")
 
     print("P. 点墨点＝只翻开帖页（视野不得被夺走）")
     p = o["openOnly"]

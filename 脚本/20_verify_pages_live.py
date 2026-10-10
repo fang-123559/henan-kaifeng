@@ -81,6 +81,20 @@ if body:
     check("仍含卡片复制按钮", 'class="cp"' in t)
     check("仍含唯一星标逻辑", "starIcon" in t)
 
+    # --- 隐私防复发（2026-10-10 加入）---
+    # 只在这条「对外发布」的校验里拦，不放进构建脚本 ——
+    # 自用版本来就该照实标店名，构建脚本硬拦会挡掉那条合法路径。
+    for _w in ["汉庭", "柒总", "新龙御景城"]:
+        check("线上首页不含隐私词「%s」" % _w, _w not in t)
+
+    # 《汴京食帖》同样必须干净（Pages 整目录托管，它可被直连）
+    s3, b3 = fetch(URL + quote("汴京食帖.html") + "?v=" + ts)
+    check("食帖页 HTTP 200", s3 == 200, "status=%s" % s3)
+    if b3:
+        t3 = b3.decode("utf-8", "replace")
+        for _w in ["汉庭", "柒总", "新龙御景城"]:
+            check("食帖页不含隐私词「%s」" % _w, _w not in t3)
+
 for name in ["图片素材/原图/18.jpg", "图片素材/原图/01.jpg"]:
     s2, b2 = fetch(URL + quote(name))
     check("中文路径图片 %s" % name, s2 == 200 and len(b2) > 1000,
