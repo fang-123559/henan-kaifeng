@@ -10,8 +10,7 @@
 
 | 版本 | 链接 |
 |---|---|
-| **原版《开封美食地图》** | https://qiling77755.github.io/henan-kaifeng/ |
-| **新版《汴京食帖》** | [汴京食帖.html](https://qiling77755.github.io/henan-kaifeng/%E6%B1%B4%E4%BA%AC%E9%A3%9F%E5%B8%96.html) |
+| **原版《开封美食地图》** | https://fang-123559.github.io/henan-kaifeng/ |
 | **国内镜像（秒开）** | https://kaifeng-food-map-72887.app.workbuddy.host/ |
 
 > 手机可直接打开，双指缩放；电脑端滚轮缩放 / 拖拽平移。两份都是单文件、零外部依赖，双击本地文件也能跑。
