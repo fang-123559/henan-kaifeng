@@ -167,7 +167,7 @@ window.addEventListener('load',function(){
 
 
 def run(w, h):
-    src = open(os.path.join(ROOT, "开封美食地图.html"), encoding="utf-8").read()
+    src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     tmp = os.path.join(ROOT, "_probe_toggle_tmp.html")
     with open(tmp, "w", encoding="utf-8") as f:
         f.write(src.replace("</body>", PROBE + "</body>"))

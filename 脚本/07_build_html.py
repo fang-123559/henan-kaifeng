@@ -683,7 +683,7 @@ _ljs  = open(os.path.join(_vendor, "leaflet.js"),  encoding="utf-8").read()
 html = (TPL.replace("__LEAFLET_CSS__", _lcss)
            .replace("__LEAFLET_JS__", _ljs)
            .replace("__DATA__", json.dumps(spots, ensure_ascii=False)))
-out = os.path.join(ROOT, "开封美食地图.html")
+out = os.path.join(ROOT, "index.html")
 with open(out, "w", encoding="utf-8") as f:
     f.write(html)
 print("written", out, len(html), "chars")

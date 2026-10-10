@@ -3,8 +3,8 @@
 import os, re, html as _h
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-NEW = os.path.join(ROOT, "开封美食地图.html")
-OLD = os.path.join(ROOT, "开封美食地图.before_notemove.bak.html")
+NEW = os.path.join(ROOT, "index.html")
+OLD = os.path.join(ROOT, "index.before_notemove.bak.html")
 
 def read(p):
     with open(p, encoding="utf-8") as f:

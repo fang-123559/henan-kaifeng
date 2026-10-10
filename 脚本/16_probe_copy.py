@@ -9,7 +9,7 @@ CHROME = next((p for p in [
     os.path.expandvars(r"%LocalAppData%\Google\Chrome\Application\chrome.exe"),
 ] if os.path.exists(p)), "chrome")
 NODE   = os.environ.get("NODE_BIN") or shutil.which("node") or "node"
-HTML   = os.path.join(ROOT, "开封美食地图.html")
+HTML   = os.path.join(ROOT, "index.html")
 
 src = open(HTML, encoding="utf-8").read()
 

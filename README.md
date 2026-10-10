@@ -61,7 +61,7 @@
    07_build_html.py              21_build_shitie.py
    （套模板 + 内联 Leaflet）        （自绘墨图 + 内联全部 CSS/JS）
         │                              │
-   开封美食地图.html / index.html    汴京食帖.html
+   index.html                     汴京食帖.html
         │                              │
         ▼  ⑦ 验证 14–19                ▼  ⑧ 验证 22 / 23
    （位置·复制·溢出·开关·排版）      （探针 15 档 + 核验 A–Q 十七节）
@@ -109,7 +109,7 @@
 
 | 脚本 | 做什么 |
 |---|---|
-| `07_build_html.py` | 读 `data.json`，套 HTML 模板（**内联 Leaflet 1.9.4**，避免联网加载库），输出 `开封美食地图.html` |
+| `07_build_html.py` | 读 `data.json`，套 HTML 模板（**内联 Leaflet 1.9.4**，避免联网加载库），输出 `index.html` |
 
 发布前的六道验证（全部为浏览器内实测，不靠推断）：
 
@@ -234,7 +234,7 @@ python 脚本/21_build_shitie.py     # → 汴京食帖.html
 **重建《开封美食地图》**：需要 `脚本/vendor/` 下的 Leaflet 源文件。
 
 ```bash
-python 脚本/07_build_html.py       # → 开封美食地图.html
+python 脚本/07_build_html.py       # → index.html
 ```
 
 **验证**（需要 Chrome）：

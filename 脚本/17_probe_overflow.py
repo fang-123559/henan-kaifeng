@@ -47,8 +47,8 @@ def probe(path, w, h):
     m = re.search(r"<title>PROBE(.*?)</title>", r.stdout, re.S)
     return json.loads(m.group(1)) if m else {"error": (r.stderr or "")[-200:]}
 
-NEW = os.path.join(ROOT, "开封美食地图.html")
-OLD = os.path.join(ROOT, "开封美食地图.before_copybtn.bak.html")
+NEW = os.path.join(ROOT, "index.html")
+OLD = os.path.join(ROOT, "index.before_copybtn.bak.html")
 for w in (430, 700, 1000, 1440):
     a = probe(NEW, w, 900)
     b = probe(OLD, w, 900)
